@@ -29,12 +29,8 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "list")
-    @JsonIgnore
     private TaskList list;
 
     @ManyToMany(mappedBy = "tasks", cascade = CascadeType.ALL)
     private List<User> assignedUsers;
-
-
-
 }

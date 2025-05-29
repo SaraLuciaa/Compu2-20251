@@ -60,16 +60,22 @@ public class TaskControllerImpl implements TaskController {
     public ResponseEntity<?> updateTask(@PathVariable long id, @RequestBody TaskDto dto) {
         Task task = mapper.taskDtoToTask(dto);
         task.setId(id); 
+
         TaskList list = taskListRepository.findById(dto.getListId()).orElse(null);
-        task.setList(list); 
+        if (list == null) {
+            return ResponseEntity.badRequest().body("TaskList not found with ID: " + dto.getListId());
+        }
+
+        task.setList(list); // ya no hagas list.getTasks().add(task)
 
         task = taskService.updateTask(task);
         if (task == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Invalid Task data");
         }
 
         return ResponseEntity.ok(mapper.taskToTaskDto(task));
     }
+
 
     @Override
     public ResponseEntity<?> deleteTask(long id) {

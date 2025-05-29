@@ -38,6 +38,7 @@ const Task = ({ task }) => {
                         priority: currentTask.priority,
                         listId: currentTask.listId - 1,
                     };
+                    console.log(updatedTask)
                     putTask(updatedTask);
                 }}
             >
