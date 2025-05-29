@@ -23,8 +23,8 @@ public interface TaskController {
     @PostMapping
     public ResponseEntity<?> addTask(@RequestBody TaskDto dto);
 
-    @PutMapping
-    public ResponseEntity<?> updateTask(@RequestBody TaskDto dto);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateTask(@PathVariable long id, @RequestBody TaskDto dto);
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable long id);

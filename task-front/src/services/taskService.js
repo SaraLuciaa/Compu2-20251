@@ -13,3 +13,10 @@ export const createTask = (task) => {
     return response.data;
   });
 }
+
+export const putTask = (task) => {
+  return axiosInstance.put(`/api/tasks/${task.id}`, task).then((response) => {
+    console.log(response.data);
+    return response.data;
+  });
+};

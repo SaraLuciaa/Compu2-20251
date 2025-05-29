@@ -4,15 +4,19 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.icesi.taskManager.controllers.api.TaskController;
 import co.icesi.taskManager.dtos.TaskDto;
 import co.icesi.taskManager.mappers.TaskMapper;
 import co.icesi.taskManager.model.Task;
+import co.icesi.taskManager.model.TaskList;
+import co.icesi.taskManager.repositories.TaskListRepository;
 import co.icesi.taskManager.services.interfaces.TaskService;
 
 @RestController
@@ -20,6 +24,9 @@ public class TaskControllerImpl implements TaskController {
 
     @Autowired
     private TaskService taskService;
+
+    @Autowired
+    private TaskListRepository taskListRepository;
 
     @Autowired
     private TaskMapper mapper;
@@ -49,13 +56,19 @@ public class TaskControllerImpl implements TaskController {
     }
 
     @Override
-    public ResponseEntity<?> updateTask(TaskDto dto) {
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateTask(@PathVariable long id, @RequestBody TaskDto dto) {
         Task task = mapper.taskDtoToTask(dto);
+        task.setId(id); 
+        TaskList list = taskListRepository.findById(dto.getListId()).orElse(null);
+        task.setList(list); 
+
         task = taskService.updateTask(task);
         if (task == null) {
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.status(200).body(mapper.taskToTaskDto(task));
+
+        return ResponseEntity.ok(mapper.taskToTaskDto(task));
     }
 
     @Override

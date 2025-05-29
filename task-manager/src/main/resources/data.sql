@@ -1,5 +1,5 @@
 INSERT INTO users (username, password, email, first_name, last_name, phone_number, address, is_active)
-VALUES ('jdoe', '$2a$10$Xyfe1NDvBXTIgUn5na7TruVM7NqU3okrr4zfGh3AU5M56ljW/85iK', 'jdoe@example.com', 'John', 'Doe', '1234567890', '123 Main St', true);
+VALUES ('jdoe', '$2a$12$PIPBY3pd49SGDU0pXgzL/eA966K29Up5U3QcUhhFs/cX1UQ9FVvpq', 'jdoe@example.com', 'John', 'Doe', '1234567890', '123 Main St', true);
 
 INSERT INTO users (username, password, email, first_name, last_name, phone_number, address, is_active)
 VALUES ('asmith', '$2a$10$Xyfe1NDvBXTIgUn5na7TruVM7NqU3okrr4zfGh3AU5M56ljW/85iK', 'asmith@example.com', 'Alice', 'Smith', '9876543210', '456 Oak Ave', false);

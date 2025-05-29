@@ -55,6 +55,7 @@ public class TaskServiceImp implements TaskService {
         t.setName(task.getName());
         t.setNotes(task.getNotes());
         t.setPriority(task.getPriority());
+        t.setList(task.getList());
 
         if (taskIsValid(t)) {
             taskRepository.save(t);
