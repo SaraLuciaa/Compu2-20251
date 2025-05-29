@@ -59,6 +59,7 @@ public class TaskServiceImp implements TaskService {
 
         if (taskIsValid(t)) {
             taskRepository.save(t);
+            webSocketSessions.sendNotification("update Task");
             return t;
         }else{
             return null;

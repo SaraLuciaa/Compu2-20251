@@ -44,6 +44,23 @@ const Task = ({ task }) => {
             >
                 Anterior
             </Button>
+            <Button
+                onClick={() => {
+                    if (!currentTask) return;
+                    const updatedTask = {
+                        id: currentTask.id,
+                        name: currentTask.name,
+                        description: currentTask.description,
+                        notes: currentTask.notes,
+                        priority: currentTask.priority,
+                        listId: currentTask.listId + 1,
+                    };
+                    console.log(updatedTask)
+                    putTask(updatedTask);
+                }}
+            >
+                Siguiente
+            </Button>
         </Grid>
     );
 };
